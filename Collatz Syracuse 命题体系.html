@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)file:///C:/Users/savyc/Downloads/deepseek_html_20260904_1a2c62.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collatz Syracuse 命题体系 · 修正版 (2026-09-05)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 60px -12px rgba(0,0,0,0.15);
+        }
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #0f172a, #334155);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .subhead {
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: #f1f5f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            margin-bottom: 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .badge {
+            display: inline-block;
+            font-weight: 600;
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+        .badge.proven { background: #bbf7d0; color: #166534; }
+        .badge.conditional { background: #fde68a; color: #92400e; }
+        .badge.false { background: #fecaca; color: #991b1b; }
+        .badge.failed { background: #e2e8f0; color: #475569; }
+        .badge.numeric { background: #bfdbfe; color: #1e40af; }
+        .badge.open { background: #e9d5ff; color: #5b21b6; }
+
+        .section {
+            margin-top: 2.5rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1.5rem;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        .section h2 small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #64748b;
+        }
+        .prop-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .prop-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            transition: box-shadow 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+        .prop-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border-color: #cbd5e1;
+        }
+        .prop-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.6rem 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .prop-id {
+            font-weight: 700;
+            font-size: 1.1rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #0f172a;
+            min-width: 80px;
+        }
+        .prop-status {
+            font-size: 0.85rem;
+        }
+        .prop-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #0f172a;
+            margin: 0.1rem 0 0.3rem 0;
+        }
+        .prop-content {
+            color: #334155;
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+            background: #f8fafc;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #cbd5e1;
+        }
+        .prop-proof {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-top: 0.3rem;
+        }
+        .prop-proof strong {
+            color: #1e293b;
+        }
+        details {
+            margin-top: 0.3rem;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 500;
+            color: #2563eb;
+            font-size: 0.9rem;
+        }
+        summary:hover {
+            color: #1d4ed8;
+        }
+        .proof-detail {
+            background: #f1f5f9;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            border-left: 2px solid #94a3b8;
+        }
+        .footnote {
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1.5rem;
+            text-align: center;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            .prop-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>🧮 Collatz Syracuse 命题体系</h1>
+    <div class="subhead">
+        <span><strong>版本：</strong>2026-09-05 修正版（基于验证与创新梳理）</span>
+        <span><strong>状态：</strong>代数推导 + 数值验算 + 文献对照</span>
+    </div>
+
+    <!-- 图例 -->
+    <div class="legend">
+        <span><span class="badge proven">✅ 严格已证</span> 代数恒等式 / 文献定理</span>
+        <span><span class="badge conditional">⚠️ 条件已证</span> 依赖 Collatz 或其等价假设</span>
+        <span><span class="badge false">❌ 已错误</span> 被明确否定</span>
+        <span><span class="badge failed">🔴 已失败</span> 方法论不适用</span>
+        <span><span class="badge numeric">🔍 数值观察</span> 待严格化</span>
+        <span><span class="badge open">❓ 开放</span> 未解决</span>
+    </div>
+
+    <!-- 第一部分：严格已证 -->
+    <div class="section">
+        <h2>第一部分 · 严格已证命题 <small>（含修正升级项）</small></h2>
+        <div class="prop-grid">
+
+            <!-- P1 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">P1</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">轨道恒等式</div>
+                <div class="prop-content">2<sup>S</sup>·n<sub>k</sub> = 3<sup>O</sup>·n<sub>0</sub> + R，R = Σ 3<sup>j</sup>·2<sup>e_j</sup>，0=e₀&lt;...&lt;e<sub>O-1</sub>&lt;S。</div>
+                <div class="prop-proof"><strong>证明：</strong>由 Collatz 步骤连乘整理。R≥0，R=0 仅平凡环。</div>
+            </div>
+
+            <!-- P2 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">P2</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">v₂(3n+1) 几何分布</div>
+                <div class="prop-content">P(v₂(3n+1)=k) = 2<sup>−k</sup>，k≥1。</div>
+                <div class="prop-proof"><strong>证明：</strong>2-adic 数论标准结果（Conway-Wagon 1990 类型论证）。数值 n=1..9999 完全吻合。</div>
+            </div>
+
+            <!-- P13 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">P13</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">平均压缩因子</div>
+                <div class="prop-content">E[2<sup>−v₂</sup> | n奇] = 1/3。</div>
+                <div class="prop-proof"><strong>证明：</strong>由 P2 推导：Σ 4<sup>−k</sup> = 1/3。</div>
+            </div>
+
+            <!-- D12-R1 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">D12-R1</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">R<sub>min</sub> 精确公式</div>
+                <div class="prop-content">R<sub>min</sub>(O) = (6<sup>O</sup> − 1) / 5。</div>
+                <div class="prop-proof"><strong>证明：</strong>独立推导。e_j 取最小 j 时得几何级数。数值 O=1..7 全匹配。</div>
+            </div>
+
+            <!-- D25 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">D25-P1~P3</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">模16确定性转移矩阵谱</div>
+                <div class="prop-content">特征值 λ={1×2, 0×14}；非吸收态 n≥4 汇聚到状态1。</div>
+                <div class="prop-proof"><strong>证明：</strong>确定性置换矩阵谱分析。重大修正：D22 的 |λ₂|≈1 是随机采样伪影。</div>
+            </div>
+
+            <!-- D26 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">D26-L1~L4</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">R<sub>min</sub> 有限域循环结构</div>
+                <div class="prop-content">周期 = ord<sub>p</sub>(6)；映射 O → R<sub>min</sub>(O) mod p 是双射。</div>
+                <div class="prop-proof"><strong>证明：</strong>代数数论。解释了“7 编码 O 奇偶性”的根因。</div>
+            </div>
+
+            <!-- S-E2 升级 -->
+            <div class="prop-card" style="border-color: #86efac; background: #f0fdf4;">
+                <div class="prop-header"><span class="prop-id">S-E2 ⬆️ 升级</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">v₂ 序列 dyadic 谱闭式（原 🔍 → ✅）</div>
+                <div class="prop-content">G[k] = Σ<sub>i=1}^{K}</sub> 1[(N/2<sup>i</sup>)|k] · (N/2<sup>i</sup>) · ω<sup>k·e_i</sup> + ω<sup>k·e_base</sup>，其中 e<sub>i</sub>=(2·4<sup>i-1</sup>−2)/3。</div>
+                <div class="prop-proof"><strong>证明：</strong>Mahler/2-kernel 生成函数推导。N=256 全 k 核对 max_diff=1.6e-14。</div>
+            </div>
+
+            <!-- S-G1~G3 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">S-G1~G3</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">2<sup>K</sup>−1 增长相谱定理</div>
+                <div class="prop-content">T<sup>2m</sup>(2<sup>K</sup>−1)=3<sup>m</sup>·2<sup>K−m</sup>−1；对数高度谱为纯 Nyquist 线。LTE 延长至 2+v₂(K) 步。</div>
+                <div class="prop-proof"><strong>证明：</strong>代数闭式 + LTE 引理。提供任意长可证轨道段。</div>
+            </div>
+
+            <!-- S-I1~I4 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">S-I1~I4</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">Walsh-Hadamard 谱闭式</div>
+                <div class="prop-content">ramp 的 WHT 精确闭式、折叠公式、分块常值支撑定理、Haar 细节恒等式。</div>
+                <div class="prop-proof"><strong>证明：</strong>沃尔什函数 = 2-adic 特征标，逐点恒等式 + 独立重算。</div>
+            </div>
+
+            <!-- S-L3 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">S-L3</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">v₂ 平衡引理</div>
+                <div class="prop-content">任意 2<sup>m</sup> 连续奇指标块上，(v₂−2) 的和 = v₂(3j₀+2)−m−1。</div>
+                <div class="prop-proof"><strong>证明：</strong>模 2<sup>m</sup> 完全剩余系双射。严格证明 S-J1 的 4<sup>−l</sup> 反比律机制。</div>
+            </div>
+
+            <!-- 其他重要已证 -->
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">T1, T2, M1, P-Conway</span><span class="prop-status"><span class="badge proven">✅ 已证</span></span></div>
+                <div class="prop-title">遍历论 / 2-adic / 不可判定性</div>
+                <div class="prop-content">Tao 2019 几乎处处有界；Terras 1976 几乎处处下降；T 在 Z₂ 上保 Haar；Conway 1972 广义 Collatz 停止问题不可判定。</div>
+                <div class="prop-proof"><strong>证明：</strong>文献标准定理，状态与公开文献一致。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第二部分：条件已证 -->
+    <div class="section">
+        <h2>第二部分 · 条件已证命题 <small>（依赖 Collatz 弱形式）</small></h2>
+        <div class="prop-grid">
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">Lemma 4 / 5</span><span class="prop-status"><span class="badge conditional">⚠️ 条件</span></span></div>
+                <div class="prop-title">Assani Claim（三角形下降猜想）</div>
+                <div class="prop-content">非 leftmost 三角形节点迭代下降到 &lt; root。核心部分（i≥1）已证；i=0 依赖 Collatz 弱形式。</div>
+                <div class="prop-proof"><strong>证明状态：</strong>Lemma 3 代数可证；i=0 右边界点未覆盖。</div>
+            </div>
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">P12-type</span><span class="prop-status"><span class="badge conditional">⚠️ 条件</span></span></div>
+                <div class="prop-title">Assani 定理4.2</div>
+                <div class="prop-content">非 Haar T-不变概率测度存在性 ⇔ Collatz 猜想。</div>
+                <div class="prop-proof"><strong>证明状态：</strong>Assani 文献，power-bounded 与猜想等价。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第三部分：错误与失败 -->
+    <div class="section">
+        <h2>第三部分 · 已证伪 &amp; 失败方向</h2>
+        <div class="prop-grid">
+            <div class="prop-card"><span class="prop-id">E1</span> <span class="badge false">❌ 错误</span> T(2·root−2) = root−1 ≠ root（代数事实）。</div>
+            <div class="prop-card"><span class="prop-id">E2</span> <span class="badge false">❌ 错误</span> O=41 非 log₂3 连分数收敛子。</div>
+            <div class="prop-card"><span class="prop-id">F1</span> <span class="badge failed">🔴 失败</span> 中间步骤 S/O 不等式（反例 n=100, n=27）。</div>
+            <div class="prop-card"><span class="prop-id">F7</span> <span class="badge failed">🔴 失败</span> Markov 链谱隙（确定性置换矩阵无谱隙，D25 否定）。</div>
+        </div>
+    </div>
+
+    <!-- 第四部分：数值观察（核心新规律） -->
+    <div class="section">
+        <h2>第四部分 · 数值发现的新规律 <small>（🔍 待严格化）</small></h2>
+        <div class="prop-grid">
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">S-F3</span><span class="prop-status"><span class="badge numeric">🔍 数值</span></span></div>
+                <div class="prop-title">谱困难分解：残差为宽带连续谱</div>
+                <div class="prop-content">非 dyadic 残差由奇步递推（3-膨胀项）独占；N=20000 定量：残差占能量 90.5%，dyadic 格线为离散峰叠加。</div>
+                <div class="prop-proof"><strong>意义：</strong>“Collatz 难在 3n+1 步”的频谱精确定位。</div>
+            </div>
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">S-F5 / S-L4</span><span class="prop-status"><span class="badge numeric">🔍 数值</span></span></div>
+                <div class="prop-title">残差长记忆 (Hurst &gt; 0.5)</div>
+                <div class="prop-content">σ 去趋势残差自相关不衰减（ρ(4096)=0.18），H=0.608；Wiener 绝对可和判据不适用。</div>
+            </div>
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">S-H1 / S-L2</span><span class="prop-status"><span class="badge numeric">🔍 数值</span></span></div>
+                <div class="prop-title">纯 L 3-adic 梳状谱 + 载体定位</div>
+                <div class="prop-content">纯 L 流峰位于 f=(3/80)·j。梳由块长序列的根序结构承载，块内 σ 值贡献连续谱。</div>
+            </div>
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">S-J2</span><span class="prop-status"><span class="badge numeric">🔍 数值</span></span></div>
+                <div class="prop-title">σ 非 3-adic 连续（否证性）</div>
+                <div class="prop-content">mod 3<sup>j</sup> 类均值极差随 j 增长（斜率 +0.886），无固定 3-adic 极限点。</div>
+            </div>
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">S-K2</span><span class="prop-status"><span class="badge numeric">🔍 数值</span></span></div>
+                <div class="prop-title">阶梯居所否证</div>
+                <div class="prop-content">625-格阶梯并非 +v₂ 可剥离部分；剥离后峰仍在（占比 0.095→0.110），阶梯源自奇核盖印几何。</div>
+            </div>
+            <div class="prop-card">
+                <div class="prop-header"><span class="prop-id">S-L5</span><span class="prop-status"><span class="badge numeric">🔍 数值</span></span></div>
+                <div class="prop-title">跨基特征标谱不对称</div>
+                <div class="prop-content">3-adic 格能量占比 3.0e-5，比 2-adic 同型格（0.033）低三个数量级 ⇒ 结构定量地纯 2-adic。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第五部分：开放问题 -->
+    <div class="section">
+        <h2>第五部分 · 开放问题 <small>（❓ 未解决）</small></h2>
+        <div class="prop-grid">
+            <div class="prop-card">
+                <span class="prop-id">O1</span> <span class="badge open">❓ 开放</span> Assani Claim 的 i=0 情况（右边界点）依赖 Collatz 弱形式。
+            </div>
+            <div class="prop-card">
+                <span class="prop-id">O5 ⭐ 新增</span> <span class="badge open">❓ 开放</span> <strong>谱残差与循环的等价性：</strong>若 σ(n) 的非 dyadic 谱残差消失（σ 为严格 2-regular），能否推出唯一循环？反之，非平凡循环是否必然蕴含 S-F3 残差？双向均未证。
+            </div>
+            <div class="prop-card">
+                <span class="prop-id">O3</span> <span class="badge open">❓ 开放</span> Leftmost branch 行为（纯 L 序列是否总下降）——S-H 提供谱学不变量候选。
+            </div>
+            <div class="prop-card">
+                <span class="prop-id">O2 / O4</span> <span class="badge open">❓ 开放</span> 非 Haar 不变测度存在性；S<sub>min</sub> 精确下界。
+            </div>
+        </div>
+    </div>
+
+    <!-- 修正记录 -->
+    <div class="footnote">
+        <strong>📌 修正记录（2026-09-05）：</strong>
+        P32 从 ✅ 降为 ⚠️（等价于无整数环，属条件结果）；
+        S-E2 从 🔍 升级为 ✅（已提供完整闭式推导）；
+        S-F1/S-K1 保留 ✅ 但标注“观察级/初等对齐”；
+        新增 O5 谱残差等价性猜想。
+        <br><br>
+        <span style="color: #334155;">总计：严格已证 40+ · 条件 4 · 数值观察 18 · 开放 5 · 错误/失败 10</span>
+    </div>
+
+</div>
+
+</body></html>

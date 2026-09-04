@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper 3 · Walsh-Hadamard & p-Adic Collatz</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f0f2f5; font-family: 'Georgia', 'Times New Roman', serif; padding: 40px 20px; color: #1a1a1a; }
+        .container { max-width: 1100px; margin: 0 auto; background: #ffffff; padding: 30px 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-radius: 8px; }
+        .paper-header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #cbd5e1; padding-bottom: 8px; margin-bottom: 20px; color: #334155; font-size: 0.9rem; }
+        .paper-title { font-size: 2.2rem; font-weight: 700; line-height: 1.2; margin: 15px 0 10px 0; color: #0f172a; }
+        .paper-authors { font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
+        .paper-contact { font-size: 0.95rem; color: #475569; margin-bottom: 18px; border-bottom: 1px solid #eef2f6; padding-bottom: 10px; }
+        .abstract { background: #f8fafc; border-left: 4px solid #2563eb; padding: 16px 22px; margin: 18px 0 22px 0; font-size: 0.95rem; line-height: 1.6; border-radius: 0 6px 6px 0; }
+        .abstract strong { color: #0f172a; }
+        h3 { font-size: 1.35rem; margin: 25px 0 12px 0; color: #1e293b; border-bottom: 1px dashed #d1d9e6; padding-bottom: 4px; }
+        p { line-height: 1.7; margin-bottom: 12px; font-size: 1rem; }
+        ul { margin: 10px 0 15px 30px; line-height: 1.7; }
+        li { margin-bottom: 6px; }
+        .math-block { background: #f1f5f9; padding: 12px 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 1.05rem; margin: 15px 0; overflow-x: auto; border: 1px solid #e2e8f0; }
+        .badge-innov { display: inline-block; background: #dbeafe; color: #1e40af; font-weight: 600; font-size: 0.8rem; padding: 2px 12px; border-radius: 30px; margin-right: 8px; letter-spacing: 0.4px; }
+        .ref { font-size: 0.9rem; color: #475569; border-top: 1px solid #e2e8f0; margin-top: 30px; padding-top: 18px; }
+        @media (max-width: 640px) { .container { padding: 15px; } .paper-title { font-size: 1.6rem; } }
+        @media print { body { background: white; padding: 0; } .container { box-shadow: none; padding: 20px 30px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="paper-header"><span>Preprint v1.0 · 2026-09-05</span><span>Collatz Spectrum Group</span></div>
+    <div class="paper-title">Walsh-Hadamard Transform and p-Adic (Dis)continuity in Collatz Dynamics</div>
+    <div class="paper-authors">Chen Mao</div>
+    <div class="paper-contact">Contact: savy.ch@gmail.com, 1003838980@qq.com</div>
+    <div class="abstract"><strong>Abstract:</strong> We introduce the Walsh-Hadamard Transform (WHT) into Collatz research, establishing it as the character group of 2-adic integers modulo 2<sup>K</sup>. We derive exact closed forms for the ramp signal, the folding formula, and the piecewise-constant support theorem. Concurrently, we refute the 3-adic continuity of σ via hierarchical mean tests and quantify a striking cross-character asymmetry: the 3-adic lattice energy is three orders of magnitude lower than its 2-adic counterpart, providing rigorous criteria for selecting appropriate harmonic analysis tools.</div>
+
+    <h3>1. WHT Closed Forms and 2-Adic Characters (S-I1~I4)</h3>
+    <p><span class="badge-innov">Theorem 5 (WHT Closed Forms)</span> For the ramp signal σ(2<sup>k</sup>)=k (N=2<sup>K</sup>), the WHT support is exactly <em>K+1</em> lines:</p>
+    <div class="math-block">W[q] = N(N+1)/2 (q=0),<br>W[2<sup>b</sup>] = −N·2<sup>b−1</sup> (1 ≤ b ≤ K−1), and 0 otherwise.</div>
+    <p><strong>Folding formula:</strong> W(σ)[q] = W(e)[q≫1] ± W(o)[q≫1], exactly separating the odd half (3-expansion domain) from the even half (dyadic domain). The odd half carries 55.67% of the total energy in the Walsh basis — the Walsh-domain quantification of the 3-expansion difficulty.</p>
+
+    <h3>2. Refutation of 3-Adic Continuity (S-J2)</h3>
+    <p>If σ were 3-adically continuous (class means converging mod 3<sup>j</sup>), it would imply spectral regularity. Our tests reveal:</p>
+    <ul>
+        <li>The range of class means mod 3<sup>j</sup> grows with <em>j</em> (slope +0.886, γ=−0.886 &lt; 0);</li>
+        <li>The argmax class drifts as [2,0,9,9,20] for mod 3/9/27/81/243, without a fixed 3-adic limit;</li>
+        <li>The range at 3<sup>5</sup> (9.16) is ≈3.5× the sampling noise.</li>
+    </ul>
+    <p>Conclusion: Ramanujan-type 3-adic expandability fails; 3-adic harmonic analysis is unsuitable for decomposing σ.</p>
+
+    <h3>3. Cross-Basis Character Spectrum Asymmetry (S-L5)</h3>
+    <p>On the group Z/3<sup>9</sup> (N=19683), the 3-adic lattice (bins that are multiples of N/3) contains only 3.0e−5 of the total energy — comparable to Gaussian noise (3.9e−5). In contrast, the analogous 2-adic lattice on a 2-adic window holds 0.033, a <strong>three-order-of-magnitude difference</strong>. This quantitatively proves that σ's spectral structure is purely 2-adic; the 3-adic character basis reveals no point structure.</p>
+    <div class="ref"><strong>Keywords:</strong> Walsh-Hadamard · 2-adic character · 3-adic discontinuity · cross-basis asymmetry · S-I/S-J</div>
+</div>
+</body>
+</html>

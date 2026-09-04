@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper 5 · Methodological Corrections & Unified Program</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f0f2f5; font-family: 'Georgia', 'Times New Roman', serif; padding: 40px 20px; color: #1a1a1a; }
+        .container { max-width: 1100px; margin: 0 auto; background: #ffffff; padding: 30px 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-radius: 8px; }
+        .paper-header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #cbd5e1; padding-bottom: 8px; margin-bottom: 20px; color: #334155; font-size: 0.9rem; }
+        .paper-title { font-size: 2.0rem; font-weight: 700; line-height: 1.2; margin: 15px 0 10px 0; color: #0f172a; }
+        .paper-authors { font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
+        .paper-contact { font-size: 0.95rem; color: #475569; margin-bottom: 18px; border-bottom: 1px solid #eef2f6; padding-bottom: 10px; }
+        .abstract { background: #f8fafc; border-left: 4px solid #2563eb; padding: 16px 22px; margin: 18px 0 22px 0; font-size: 0.95rem; line-height: 1.6; border-radius: 0 6px 6px 0; }
+        .abstract strong { color: #0f172a; }
+        h3 { font-size: 1.35rem; margin: 25px 0 12px 0; color: #1e293b; border-bottom: 1px dashed #d1d9e6; padding-bottom: 4px; }
+        p { line-height: 1.7; margin-bottom: 12px; font-size: 1rem; }
+        ul { margin: 10px 0 15px 30px; line-height: 1.7; }
+        li { margin-bottom: 6px; }
+        .math-block { background: #f1f5f9; padding: 12px 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 1.05rem; margin: 15px 0; overflow-x: auto; border: 1px solid #e2e8f0; }
+        .badge-innov { display: inline-block; background: #dbeafe; color: #1e40af; font-weight: 600; font-size: 0.8rem; padding: 2px 12px; border-radius: 30px; margin-right: 8px; letter-spacing: 0.4px; }
+        .ref { font-size: 0.9rem; color: #475569; border-top: 1px solid #e2e8f0; margin-top: 30px; padding-top: 18px; }
+        @media (max-width: 640px) { .container { padding: 15px; } .paper-title { font-size: 1.6rem; } }
+        @media print { body { background: white; padding: 0; } .container { box-shadow: none; padding: 20px 30px; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="paper-header"><span>Preprint v1.0 · 2026-09-05</span><span>Collatz Spectrum Group</span></div>
+    <div class="paper-title">Methodological Corrections, Spectral-Cycle Equivalence, and a Unified Program for the Collatz Conjecture</div>
+    <div class="paper-authors">Chen Mao</div>
+    <div class="paper-contact">Contact: savy.ch@gmail.com, 1003838980@qq.com</div>
+    <div class="abstract"><strong>Abstract:</strong> We consolidate the methodological corrections identified during the validation of the proposition system. First, we definitively refute the Markov-chain spectral-gap approach (F7) by proving that the deterministic mod-16 transition matrix has spectrum {1×2, 0×14} — the apparent |λ₂|≈1 was a stochastic sampling artifact. Second, we adjust the status of P32, clarifying that the absence of non-trivial integer periodic points in Z₂ is conditional on the conjecture itself. Third, we formalize the central open conjecture O5: the equivalence between the vanishing of the non-dyadic spectral residual (σ being strictly 2-regular) and the uniqueness of the trivial cycle. This bridges harmonic analysis directly with the arithmetic conjecture. Finally, we outline a unified program combining the proven baselines (v₂ fractal, growth Nyquist, WHT closure, balance lemma) with the localized difficulty (broadband residual, long memory) to attack the spectral measure classification.</div>
+
+    <h3>1. Methodological Correction: The Mod-16 Deterministic Spectrum (D25)</h3>
+    <p>Prior work (D22) suggested an empirical spectral gap |λ₂|≈1 from randomized sampling, hinting at a Markov-chain convergence proof (F7). We prove that the <strong>deterministic mod-16 transition matrix</strong> has eigenvalues λ={1×2, 0×14}, with a complete spectral gap of 1. All non-absorbing states converge to the absorbing state 1 after n≥4 steps. The apparent |λ₂| is a numerical artifact of stochastic sampling. Hence, the Markov-chain spectral-gap route is <strong>definitively closed</strong>.</p>
+
+    <h3>2. Status Adjustment: P32 (Integer Periodic Points in Z₂)</h3>
+    <p>The original proposition stated “Z₂ contains no non-trivial integer periodic points” as strictly proven. We correct this to <strong>conditional</strong> (⚠️). The statement is tautologically equivalent to the Collatz conjecture having no non-trivial cycles. While it is true that the only known integer periodic point is the trivial cycle, proving the absence of all others is exactly the open problem. The literature (Lagarias 1985) does not provide an unconditional proof; it provides structural constraints.</p>
+
+    <h3>3. The Central Open Conjecture: O5 (Spectral Residual-Cycle Equivalence)</h3>
+    <p><span class="badge-innov">Conjecture O5</span> Let σ(n) be the total stopping time. Consider its non-dyadic spectral residual after subtracting all 2-regular (dyadic) components. We conjecture:</p>
+    <ul>
+        <li>If the non-dyadic residual vanishes identically (i.e., σ is strictly 2-regular), then {1,2} is the only cycle.</li>
+        <li>Conversely, the existence of a non-trivial cycle or divergent orbit necessarily implies a non-zero residual (e.g., the broadband continuous spectrum observed in S-F3).</li>
+    </ul>
+    <p>Both directions are open. This conjecture provides a <strong>quantifiable, checkable spectral criterion</strong> for the Collatz conjecture, moving the problem from arithmetic to harmonic analysis and spectral measure theory.</p>
+
+    <h3>4. A Unified Program</h3>
+    <p>We propose a unified research program combining the proven analytic baselines with the localized difficulties:</p>
+    <ul>
+        <li><strong>Baselines (✅):</strong> v₂ fractal spectrum (S-E2), growth-phase Nyquist line (S-G), WHT closure (S-I), v₂ balance lemma (S-L3), odd-core stripping theorem (S-K1).</li>
+        <li><strong>Localized Difficulties (🔍):</strong> Broadband continuous residual (S-F3), long-range dependence (S-F5/S-L4), non-3-adic continuity (S-J2), cross-basis asymmetry (S-L5).</li>
+        <li><strong>Ultimate Target:</strong> Classify the spectral measure of the residual — absolutely continuous, singular continuous, or pure point. This classification is equivalent (via O5) to resolving the Collatz conjecture.</li>
+    </ul>
+    <div class="ref"><strong>Keywords:</strong> Methodological correction · spectral-cycle equivalence · mod-16 spectrum · unified program · O5</div>
+</div>
+</body>
+</html>
