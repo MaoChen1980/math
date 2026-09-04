@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structure-Adaptive Spectral Protocol (Revised Edition v2.0)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #f7f9fc;
+            color: #1a1a1a;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px 50px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+            border-radius: 8px;
+        }
+        .badge {
+            display: inline-block;
+            background: #8b3a3a;
+            color: white;
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 3px 14px;
+            border-radius: 30px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            margin-right: 8px;
+        }
+        .badge-green { background: #2a7a4b; }
+        .badge-gray { background: #5a6a7a; }
+        .paper-header {
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+        .paper-header .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #3a5a78;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        h1 { font-size: 2.1rem; font-weight: 700; line-height: 1.25; margin: 16px 0 8px 0; color: #0a1929; }
+        .subtitle { font-size: 1.15rem; color: #334155; margin-bottom: 12px; line-height: 1.5; }
+        .authors { font-size: 1.05rem; font-weight: 600; color: #1a2a3a; }
+        .abstract {
+            background: #f2f5f9;
+            border-left: 5px solid #1f4e79;
+            padding: 16px 22px;
+            margin: 18px 0 24px 0;
+            font-size: 0.95rem;
+            line-height: 1.65;
+            border-radius: 0 4px 4px 0;
+        }
+        h2 {
+            font-size: 1.45rem; font-weight: 700; margin: 34px 0 14px 0;
+            color: #0a1929; border-bottom: 1px solid #d0d9e5; padding-bottom: 6px;
+        }
+        h3 { font-size: 1.15rem; font-weight: 700; margin: 22px 0 10px 0; color: #1a2a3a; }
+        p { line-height: 1.7; margin-bottom: 12px; font-size: 0.98rem; }
+        ul, ol { margin: 8px 0 14px 28px; line-height: 1.7; font-size: 0.98rem; }
+        li { margin-bottom: 5px; }
+        .math-block {
+            background: #f1f3f6; padding: 12px 20px; border-radius: 6px;
+            font-family: 'Courier New', monospace; font-size: 0.95rem;
+            margin: 14px 0; overflow-x: auto; border: 1px solid #dce3ec;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92rem; }
+        th, td { border: 1px solid #d0d9e5; padding: 9px 13px; text-align: left; vertical-align: top; }
+        th { background: #e6ecf5; font-weight: 700; }
+        .warn {
+            background: #fdf6ec; border-left: 4px solid #d9822b; padding: 10px 16px;
+            border-radius: 0 4px 4px 0; font-size: 0.92rem; margin: 14px 0;
+        }
+        .note {
+            background: #eef4fb; border-left: 4px solid #1f4e79; padding: 10px 16px;
+            border-radius: 0 4px 4px 0; font-size: 0.92rem; margin: 14px 0;
+        }
+        .ref { font-size: 0.88rem; color: #3d5a73; border-top: 1px solid #d0d9e5; margin-top: 36px; padding-top: 20px; }
+        .ref li { list-style: none; margin-bottom: 5px; }
+        code { background: #eef1f5; padding: 1px 6px; border-radius: 4px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="paper-header">
+        <div class="meta">
+            <span><span class="badge">Revised Edition v2.0</span><span class="badge badge-gray">Methodological Audit Edition</span></span>
+            <span>2026-09-05</span>
+        </div>
+        <h1>Structure-Adaptive Spectral Protocol (SASP)</h1>
+        <div class="subtitle">A Rigorous Reformulation: Spectral Fingerprints as Conjecture Generators, Not Theorem Verdicts<br>
+        <span style="font-size:0.9rem;color:#5a6a7a;">— A critical rewriting of v1.0, in which all "theorems" are demoted to observations and conjectures</span></div>
+        <div class="authors">Chen Mao · Revised Edition (original v1.0, single author)</div>
+    </div>
+
+    <div class="abstract">
+        <strong>Abstract.</strong> This paper is a critical rewriting of SASP v1.0. v1.0 proposed a four-stage data-driven pipeline (sampling &rarr; arithmetic alignment &rarr; spectral fingerprinting &rarr; spectral matching) intended to convert "tool-guessing" in mathematical research into "fingerprint matching," with the Collatz stopping-time sequence &sigma;(n) as a case study, and claimed to have obtained three "theorems" and to have "closed" the Markov spectral-gap approach. This revised edition retains the pipeline as a legitimate <strong>experimental-mathematics conjecture generator</strong>, but makes six fundamental corrections: (1) it introduces a <strong>fingerprint-strength hierarchy</strong> &mdash; distinguishing "theorem-level fingerprints" (characterization theorems, where a match is a verdict) from "statistical-level fingerprints" (Hurst exponent, spectral energy fractions, Walsh&ndash;Hadamard support; conjecture-only); (2) it demotes all "proved theorems" of v1.0 to <strong>numerical observations and testable conjectures</strong>; (3) it establishes a <strong>sub-proposition delineation principle</strong> &mdash; any "applicable/not applicable" claim must specify the sub-proposition in question (pointwise convergence / stopping-time distribution / definability / p-adic structure); (4) it <strong>withdraws</strong> the claim of "closing the Markov spectral-gap approach," which would require an independent operator-level argument that v1.0 did not provide; (5) it removes or flags every reference that cannot be publicly verified; and (6) it makes explicit the requirements of <strong>control experiments and falsifiability</strong>. The revised conclusion: SASP is a <strong>conjecture generator</strong>, not a theorem-discovery machine. It closes no research direction, but it does provide a list of testable conjectures and a methodological cautionary note for subsequent rigorous work.
+    </div>
+
+    <h2>0. Revision Note</h2>
+    <p>This revised edition corrects the following defects of v1.0, item by item. Each correction is developed further in the body of the paper.</p>
+    <table>
+        <thead><tr><th>#</th><th>Defect in v1.0</th><th>Treatment in this revised edition</th></tr></thead>
+        <tbody>
+            <tr><td>R1</td><td>Numerical observations on finite samples were stated as "proved theorems" (P3/P6/P7)</td><td>All demoted to "observations" and "conjectures," with evidence levels made explicit (&sect;3, &sect;4)</td></tr>
+            <tr><td>R2</td><td>Statistical features (Hurst, spectral energy fractions, WHT support) were used as decisive fingerprints</td><td>A fingerprint-strength hierarchy L1/L2 is introduced (&sect;2.2); statistical features serve as weak hints only</td></tr>
+            <tr><td>R3</td><td>"Closing the Markov spectral-gap approach" was claimed without delimiting the object or providing an argument</td><td>Withdrawn; reformulated as "the question requires an independent argument at the level of sub-proposition B" (&sect;3.5, &sect;6)</td></tr>
+            <tr><td>R4</td><td>Citations to works that cannot be publicly retrieved (Hateley 2026, DeFranco 2026, ACT framework, etc.)</td><td>Removed; only verifiable public references are retained (&sect;7)</td></tr>
+            <tr><td>R5</td><td>Invented non-standard terminology (Arithmetic Chirality Topology, "modular-4 handeness", ghost cycles)</td><td>Standard phrasing adopted throughout, or explicitly labeled as "working definitions"</td></tr>
+            <tr><td>R6</td><td>No control experiments, no randomized baseline; the method was unfalsifiable</td><td>Falsifiability and control-experiment requirements made explicit (design provided; not yet executed, &sect;2.4)</td></tr>
+        </tbody>
+    </table>
+
+    <h2>1. Introduction: The Demand for a Systematic Approach to Tool Selection</h2>
+    <p>In arithmetic dynamics and number theory, choosing the right formal tool (algebraic geometry, analytic number theory, ergodic theory, automata theory, harmonic analysis) has long relied on intuition and analogy. v1.0's observation &mdash; that this "tool-guessing" process lacks system and reproducibility &mdash; stands, and this revised edition retains that motivation.</p>
+    <p>The revision must, however, make an epistemological fact explicit: <strong>tool selection operates at two distinct levels of strength that must not be conflated.</strong></p>
+    <ul>
+        <li><strong>Conjecture generation (heuristic)</strong>: numerical exploration suggests "this problem may exhibit structure X." This is the legitimate function of experimental mathematics; its output is a testable conjecture.</li>
+        <li><strong>Theorem verdict</strong>: confirming "this problem is structure X" or "method M does not apply to problem P." This requires characterization theorems, proofs, or decisive counterexamples. No numerical observation can support it.</li>
+    </ul>
+    <p>The fundamental error of v1.0 was to treat the former as the latter. Everything in this revised edition unfolds under this distinction.</p>
+
+    <h2>2. Methodological Framework (Revised)</h2>
+
+    <h3>2.1 The Pipeline: Four Stages (retained from v1.0)</h3>
+    <ol>
+        <li><strong>Sampling and observation</strong>: take the first N terms of a sequence f(n), with fixed random seeds for reproducibility.</li>
+        <li><strong>Arithmetic alignment</strong>: reparameterize by p-adic valuations, modular residue classes, and branch structure, stripping known trivial layers.</li>
+        <li><strong>Spectral fingerprinting</strong>: apply DFT, Walsh&ndash;Hadamard, wavelet, and Hurst analysis layer by layer.</li>
+        <li><strong>Spectral matching</strong>: compare fingerprints against known structures &mdash; <strong>producing conjectures, not verdicts</strong>.</li>
+    </ol>
+
+    <h3>2.2 NEW: Fingerprint Strength Hierarchy (core of this revision)</h3>
+    <p>Not all "fingerprints" carry equal decisiveness. Two levels are distinguished:</p>
+    <table>
+        <thead><tr><th>Level</th><th>Type of fingerprint</th><th>Examples</th><th>Force of a match</th></tr></thead>
+        <tbody>
+            <tr><td><strong>L1 Theorem-level</strong></td><td>Deciding conditions defined by characterization theorems</td><td>Christol's theorem (p-automatic &hArr; algebraic generating function over F<sub>p</sub>), Cobham's theorem, Mahler's 2-kernel, spectral-measure type classification</td><td>Match is a verdict (equivalence relation; falsifiable)</td></tr>
+            <tr><td><strong>L2 Statistical-level</strong></td><td>Numerical statistical features</td><td>Hurst exponent, spectral energy fractions, WHT nonzero-coefficient ratio, autocorrelation decay shape</td><td>Conjecture only (weak hint; no verdictive force; holds for many unrelated structures)</td></tr>
+        </tbody>
+    </table>
+    <div class="warn"><strong>Correction (R2)</strong>: v1.0 used L2 statistical features to make L1-level "proved" claims. This edition stipulates that L2 observations are always stated as "observation O<sub>k</sub>", never as "theorem." An L1 verdict may be claimed only when the corresponding characterization theorem genuinely applies to the object in question.</div>
+
+    <h3>2.3 NEW: Sub-proposition Delineation Principle</h3>
+    <p>"The Collatz problem" is not a single proposition but a family of propositions. Any claim about the applicability of a method must specify the sub-proposition at issue:</p>
+    <table>
+        <thead><tr><th>Sub-proposition</th><th>Content</th><th>Typical tools</th></tr></thead>
+        <tbody>
+            <tr><td>A &middot; Pointwise convergence</td><td>&forall;n: the orbit eventually reaches 1 (the conjecture proper)</td><td>Pointwise / analytic methods</td></tr>
+            <tr><td>B &middot; Stopping-time distribution</td><td>Statistical behavior of &sigma;(n); typical orbit behavior</td><td>Stochastic models, ergodic theory, spectral methods (Kontorovich&ndash;Lagarias, Tao)</td></tr>
+            <tr><td>C &middot; Definability</td><td>Whether &sigma; mod 2 is automatic / Presburger-definable</td><td>Automata theory (Allouche&ndash;Shallit)</td></tr>
+            <tr><td>D &middot; p-adic / spectral structure</td><td>v<sub>2</sub>-fractal spectra, mod-2<sup>k</sup> structure</td><td>Harmonic analysis, p-adic analysis</td></tr>
+        </tbody>
+    </table>
+    <div class="warn"><strong>Correction (R3)</strong>: v1.0 claimed to "close the Markov spectral-gap approach" without specifying the sub-proposition. This edition stipulates that any conclusion about applicability must be written as "for sub-proposition X, the applicability of method M requires argument Y."</div>
+
+    <h3>2.4 NEW: Falsifiability and Control-Experiment Requirements</h3>
+    <p>An effective exploratory pipeline must be able to fail. Two requirements are mandatory:</p>
+    <ul>
+        <li><strong>Randomized baseline</strong>: run the same fingerprint extraction on equally long pseudo-random sequences (or permuted versions of the original sequence) as a null hypothesis. An observation O is worth reporting only if it deviates significantly from the baseline.</li>
+        <li><strong>Falsification condition</strong>: each conjecture must state "which fingerprint pattern, if observed, would count as refuting this conjecture." If a matching process always succeeds, its output carries no information.</li>
+    </ul>
+    <div class="note"><strong>Status</strong>: the control experiments above are <strong>not yet executed</strong> in this revised edition. Accordingly, every observation in &sect;3 is labeled "value as reported in v1.0; not independently reproduced; not compared against a randomized baseline." This is an honest statement of data status, not a claim of results.</div>
+
+    <h2>3. Application: The Collatz Stopping-Time Sequence &mdash; Data Report (observations, not theorems)</h2>
+    <p>Everything below is either data reported by v1.0 or an elementary, directly verifiable fact. This edition adds no new experimental numbers.</p>
+
+    <h3>3.1 Observation O1: 2-adic recursion stratification (directly verifiable)</h3>
+    <p>For the total stopping time &sigma;(n) (of the Collatz map T), the following recursions are elementary and verifiable:</p>
+    <div class="math-block">&sigma;(2m) = 1 + &sigma;(m),&nbsp;&nbsp;&nbsp;&nbsp;&sigma;(n) = v<sub>2</sub>(n) + &sigma;(odd-core(n))</div>
+    <p>This legitimizes a 2-adic stratification (sub-proposition D): after stripping the trivial v<sub>2</sub> layer, the core signal is &sigma; on the odd core.</p>
+
+    <h3>3.2 Observation O2: Exact DFT structure of v<sub>2</sub>(3n+1) (independently verifiable)</h3>
+    <p>v1.0 (S-E2) reported that the DFT of v<sub>2</sub>(3n+1) over N = 2<sup>K</sup> has an exact dyadic-fractal structure:</p>
+    <div class="math-block">G[k] = &Sigma;<sub>i=1..K</sub> 1[(N/2<sup>i</sup>) | k] &middot; (N/2<sup>i</sup>) &middot; &omega;<sup>k&middot;e<sub>i</sub></sup> + &omega;<sup>k&middot;e<sub>base</sub></sup>,&nbsp;&nbsp; e<sub>i</sub> = (2&middot;4<sup>i&minus;1</sup> &minus; 2)/3</div>
+    <p>This formula follows by elementary recursion from v<sub>2</sub> and constitutes an <strong>independently verifiable computational fact</strong> (L1-level computation, but computation only; it is not a proposition about the Collatz conjecture). Its connection to carry dynamics (see Conjecture C2) has not been rigorously proved.</p>
+
+    <h3>3.3 Observation O3: Hurst exponent H &asymp; 0.608 (weak evidence)</h3>
+    <p>v1.0 (S-F5) reported a Hurst estimate H &asymp; 0.608 &gt; 0.5 for the detrended &sigma; residual. This edition notes:</p>
+    <ul>
+        <li>the estimate is based on a single sample with N &le; 20000, with no confidence interval, window parameters, or estimation method (DFA / R-S / periodogram) reported;</li>
+        <li>H &gt; 0.5 can arise from banal causes such as non-stationarity, residual trend, and finite-sample bias;</li>
+        <li>no randomized baseline was used.</li>
+    </ul>
+    <p><strong>Verdict</strong>: O3 can at most generate a conjecture (see C1); it constitutes no evidence of "long-range dependence" or a "non-mixing subspace."</p>
+
+    <h3>3.4 Observation O4: Full WHT support of &sigma; mod 2 (no discriminative power)</h3>
+    <p>v1.0 (S-J3) reported that &sigma; mod 2 over N = 16384 has 16383/16384 nonzero Walsh&ndash;Hadamard coefficients. This edition notes:</p>
+    <ul>
+        <li>pseudo-random sequences also exhibit full WHT support (&asymp;100% nonzero);</li>
+        <li>while a theoretical link between O4 and non-automaticity exists (the WHT structure of automatic sequences has characterizations), full support itself has <strong>no discriminative power</strong> between "random", "non-automatic", and other complex structures;</li>
+        <li>v1.0 itself conceded in P5 that "full support is neither necessary nor sufficient"; this edition carries that concession through: O4 supports no testable conclusion.</li>
+    </ul>
+
+    <h3>3.5 Observation O5: Determinism and spectrum {1&times;2, 0&times;14} of the mod-16 transition (reproducible computation)</h3>
+    <p>That mod 2<sup>k</sup> determines the first k parity steps is a classical fact since Terras (sub-proposition D). The mod-16 transition spectrum {1&times;2, 0&times;14} reported by v1.0 (F7/D25) is a <strong>reproducible finite computation</strong>, accepted by this edition as a computational fact.</p>
+    <div class="warn"><strong>Important withdrawal (R3)</strong>: v1.0 inferred from this that "the Markov spectral-gap approach is closed." This edition withdraws that claim, for three reasons: (1) the spectral-gap method studies the distributional evolution of random initial values and weighted/infinite-dimensional transfer operators (sub-proposition B), not a finite mod-16 matrix; (2) the determinism of a finite matrix does not undermine the legitimacy of statistical models &mdash; just as "each individual's height is fixed" and "heights in a population form a distribution" are not in conflict; (3) "closing" would require an operator-level argument (e.g., proving that a necessary condition for the spectral-gap method fails systematically on Collatz-related objects), which v1.0 did not provide. This edition marks "applicability of the Markov spectral-gap method to sub-proposition B" as an <strong>open question</strong>.</div>
+
+    <h2>4. Testable Conjectures from the Observations</h2>
+    <p>The conjectures below are the full positive output of the SASP pipeline in this case study. <strong>None of them is proved</strong>, but each carries an explicit falsification condition.</p>
+    <table>
+        <thead><tr><th>ID</th><th>Conjecture</th><th>Source observation</th><th>Falsification condition</th></tr></thead>
+        <tbody>
+            <tr><td>C1</td><td>The detrended &sigma; residual may exhibit non-exponential correlation decay in some weighted space for the Syracuse transfer operator</td><td>O3</td><td>H falls into a 0.5 neighborhood under larger samples (N &ge; 10<sup>6</sup>) and rigorous DFA/spectral estimation, or an explicit construction explains all observations</td></tr>
+            <tr><td>C2</td><td>A provable connection exists between the DFT fractal exponents e<sub>i</sub> of v<sub>2</sub>(3n+1) and characteristic periods of carry dynamics</td><td>O2</td><td>The spectrum cannot be constructed within a finite-automaton/carry framework</td></tr>
+            <tr><td>C3</td><td>The broadband spectrum of &sigma;(n) may be related to parity imbalance in mod-4 classes (spectrum becomes sparse after "de-chiralization")</td><td>v1.0's S<sub>3</sub> observation (not independently reproduced)</td><td>No precise definition of "de-chiralization" can be given, or sparsity fails under the definition</td></tr>
+            <tr><td>C4</td><td>Applicability of the Markov spectral-gap method to sub-proposition B: open question</td><td>&mdash;</td><td>An operator-level proof exists (in either direction)</td></tr>
+        </tbody>
+    </table>
+
+    <h2>5. Methodological Audit of v1.0 (self-audit)</h2>
+    <p>This edition records the six methodological defects that invalidated v1.0, as a reusable review checklist:</p>
+    <ol>
+        <li><strong>Inductive leap</strong>: numerical fingerprints on finite samples (N &le; 20000) were written directly as theorems about infinite objects. Numerical evidence can generate conjectures; it cannot close a proof.</li>
+        <li><strong>Insufficient discriminative power</strong>: the statistical fingerprints used produce the same output on pseudo-random sequences, with no control group. Collatz cannot be distinguished from "arbitrarily complex sequences."</li>
+        <li><strong>Unfalsifiability</strong>: match success &rarr; "framework applies"; match failure &rarr; "candidate for a new structure." The pipeline never fails, so its output carries no information.</li>
+        <li><strong>Object mismatch</strong>: the determinism of a finite mod-16 matrix was used to "close" stochastic-model methods whose object is infinite-dimensional operators/distributional evolution &mdash; a straw-man argument.</li>
+        <li><strong>Citations and terminology</strong>: references to unverifiable "in preparation" works, and invented non-standard terminology, undermined verifiability.</li>
+        <li><strong>Level conflation</strong>: L2 statistical features were treated as L1 verdicts &mdash; the common root of all defects above.</li>
+    </ol>
+
+    <h2>6. Conclusion</h2>
+    <p>The revised SASP has a clear position:</p>
+    <ul>
+        <li>it is a <strong>reproducible exploratory pipeline</strong> whose outputs are lists of conjectures and records of negative paths (the F1&ndash;F6 failure records retain their reference value, but likewise constitute no "closure" claims);</li>
+        <li>it <strong>produces no theorems</strong> and <strong>closes no research direction</strong>;</li>
+        <li>its actual contribution in this case study: two independently verifiable computational facts (O1, O2), a set of testable conjectures (C1&ndash;C3), and one explicitly open question (C4);</li>
+        <li>its most important contribution is a methodological warning: <strong>fingerprint matching can only answer "in which direction is it worth guessing?", never "is this direction right?"</strong> &mdash; the latter always requires characterization theorems, proofs, or decisive counterexamples.</li>
+    </ul>
+    <p>This paper does not solve the Collatz conjecture, nor does it declare any method "inapplicable." It does one thing only: it corrects the errors of v1.0 and leaves a legitimate experimental-mathematics pipeline in its proper place.</p>
+
+    <div class="ref">
+        <strong>References</strong> (only publicly verifiable works are listed; the v1.0 entries Hateley 2026, DeFranco 2026, Dhiman 2026, and the ACT framework are removed because they could not be publicly retrieved)
+        <ul>
+            <li>Conway, J. H. (1972). Unpredictable iterations. <em>Proc. 1972 Number Theory Conf.</em></li>
+            <li>Terras, R. (1976). A stopping time problem on the positive integers. <em>Acta Arith.</em></li>
+            <li>Lagarias, J. C. (1985). The 3x+1 problem and its generalizations. <em>Amer. Math. Monthly.</em></li>
+            <li>Allouche, J.-P., &amp; Shallit, J. (2003). <em>Automatic Sequences</em>. Cambridge University Press.</li>
+            <li>Kontorovich, A., &amp; Lagarias, J. C. (2009). Stochastic models for the 3x+1 problem. <em>arXiv:0910.1944</em>.</li>
+            <li>Tao, T. (2019). Almost all orbits of the Collatz map attain almost bounded values. <em>arXiv:1908.08104</em>.</li>
+        </ul>
+    </div>
+
+    <div style="margin-top:24px;font-size:0.85rem;color:#5a6a7a;border-top:1px solid #e0e5ec;padding-top:14px;text-align:center;">
+        Data-status statement: all numerical values in &sect;3 are taken from the v1.0 report; they have not been independently reproduced or compared against a randomized baseline; the control-experiment design is given in &sect;2.4.<br>
+        This revised edition contains no new experimental data.
+    </div>
+
+</div>
+</body>
+</html>
