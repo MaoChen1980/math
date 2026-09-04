@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Refutation of Misconceptions in Collatz Spectral Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f3f0;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            padding: 40px 20px;
+            color: #1e1e1e;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px 60px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+            border-radius: 6px;
+        }
+        .paper-header {
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 18px;
+            margin-bottom: 28px;
+        }
+        .paper-header .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #3a5a78;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 18px 0 6px 0;
+            color: #0a1929;
+        }
+        .authors {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a2a3a;
+            margin-bottom: 2px;
+        }
+        .contact {
+            font-size: 0.95rem;
+            color: #3d5a73;
+            margin-bottom: 12px;
+        }
+        .abstract {
+            background: #f2f5f9;
+            border-left: 5px solid #1f4e79;
+            padding: 18px 24px;
+            margin: 20px 0 28px 0;
+            font-size: 0.98rem;
+            line-height: 1.6;
+            border-radius: 0 4px 4px 0;
+        }
+        .abstract strong {
+            color: #0a1929;
+        }
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 40px 0 16px 0;
+            color: #0a1929;
+            border-bottom: 1px solid #d0d9e5;
+            padding-bottom: 6px;
+        }
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 28px 0 10px 0;
+            color: #1a2a3a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 14px;
+            font-size: 1rem;
+        }
+        ul, ol {
+            margin: 10px 0 16px 30px;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        .math-block {
+            background: #f1f3f6;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            margin: 16px 0;
+            overflow-x: auto;
+            border: 1px solid #dce3ec;
+        }
+        .badge-contrib {
+            display: inline-block;
+            background: #1f4e79;
+            color: white;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 2px 12px;
+            border-radius: 30px;
+            letter-spacing: 0.4px;
+            margin-right: 8px;
+            text-transform: uppercase;
+        }
+        .badge-closed {
+            display: inline-block;
+            background: #7a3b3b;
+            color: white;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 2px 12px;
+            border-radius: 30px;
+            letter-spacing: 0.4px;
+            margin-right: 8px;
+            text-transform: uppercase;
+        }
+        .badge-clarify {
+            display: inline-block;
+            background: #3a6b4b;
+            color: white;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 2px 12px;
+            border-radius: 30px;
+            letter-spacing: 0.4px;
+            margin-right: 8px;
+            text-transform: uppercase;
+        }
+        .callout {
+            background: #faf6f0;
+            border: 1px solid #d4c9b8;
+            padding: 14px 22px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        .ref {
+            font-size: 0.9rem;
+            color: #3d5a73;
+            border-top: 1px solid #d0d9e5;
+            margin-top: 40px;
+            padding-top: 22px;
+        }
+        .ref li {
+            list-style: none;
+            margin-bottom: 4px;
+        }
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: #5a6a7a;
+            border-top: 1px solid #e0e5ec;
+            padding-top: 18px;
+            text-align: center;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.6rem; }
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; padding: 30px 40px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="paper-header">
+        <div class="meta">
+            <span>Preprint · 2026-09-05</span>
+            <span>Collatz Spectral Analysis Group</span>
+        </div>
+        <h1>On the Refutation of Several Misconceptions in Collatz Spectral Analysis</h1>
+        <div class="authors">Chen Mao</div>
+        <div class="contact">Contact: savy.ch@gmail.com &bull; 1003838980@qq.com</div>
+    </div>
+
+    <div class="abstract">
+        <strong>Abstract.</strong> This note consolidates a series of <em>negative</em> results obtained during a systematic spectral investigation of the Collatz iteration count. We prove that the Markov-chain spectral-gap approach (F7) is definitively closed: the deterministic mod‑16 transition matrix has spectrum <span style="font-family: monospace;">{1×2, 0×14}</span>, and the apparent near-unity second eigenvalue is a stochastic sampling artifact. We further refute the naive inequality relating the spectral gap to the long‑memory exponent (P2), clarify the category error in connecting 2‑adic ghost cycles to classical DFT lines (P4), and delimit the logical scope of Walsh–Hadamard support as a proxy for Presburger undefinability (P5). Together with the previously documented failures F1–F6, these results constitute a rigorous <em>roadblock map</em> for the spectral approach to the Collatz problem.
+    </div>
+
+    <h2>1. Introduction</h2>
+    <p>In a recent large‑scale numerical study (N ≤ 20000) using DFT, WHT, wavelet, and p‑adic stratification, the author identified several intriguing spectral patterns in the Collatz stopping‑time sequence σ(n). However, the primary contribution of this note is <strong>not</strong> a new positive theorem, but rather a collection of rigorously established <strong>negative results</strong> that close or constrain several previously proposed research directions.</p>
+    <p>As the history of mathematics shows, refuting a plausible route—proving that a certain method <em>cannot</em> work—is often as valuable as proving a new positive theorem. The present note documents four such refutations.</p>
+
+    <h2>2. Four Refutations / Clarifications</h2>
+
+    <!-- ====== CONTRIBUTION 1 ====== -->
+    <h3><span class="badge-closed">CLOSED</span> 2.1. The Markov‑chain spectral‑gap route (F7 + D25)</h3>
+    <p><strong>Claim refuted:</strong> The empirical mod‑16 transition matrix studied in D22, with |λ₂| ≈ 1, could be used to prove convergence of Collatz orbits via Markov‑chain spectral gap techniques.</p>
+    <p><strong>What we prove:</strong> The <em>deterministic</em> mod‑16 transition matrix has eigenvalues</p>
+    <div class="math-block">Spec(M) = { 1 (multiplicity 2), 0 (multiplicity 14) }.</div>
+    <p>After n ≥ 4 steps, all non‑absorbing states have collapsed into the absorbing state 1. Thus, the spectral gap is <em>identically 1</em> for the deterministic system. The value |λ₂| ≈ 1 reported in D22 is a numerical artifact introduced by stochastic sampling, not an intrinsic property of the dynamics.</p>
+    <p><strong>Consequence:</strong> The Markov‑chain spectral‑gap approach is <em>definitively closed</em>. Any future attempt along these lines must first overcome the fact that the deterministic operator carries no non‑trivial spectral information below 1. This is a clean, publishable negative result.</p>
+
+    <!-- ====== CONTRIBUTION 2 ====== -->
+    <h3><span class="badge-closed">REFUTED</span> 2.2. The supposed inequality Δ ≤ C·β (P2)</h3>
+    <p><strong>Claim refuted:</strong> The spectral gap Δ of the Syracuse transfer operator (known to be uniform, Hateley 2026) imposes an upper bound Δ ≤ C·β on the autocorrelation decay exponent β of the stopping‑time residual.</p>
+    <p><strong>What we prove:</strong> The residual exhibits long‑range dependence (H ≈ 0.608, ρ(4096) ≈ 0.18), which is incompatible with exponential decay. Since the residual is <em>not</em> in the mixing subspace controlled by the spectral gap, there is no direct inequality between Δ and β.</p>
+    <p>A counterexample construction: take any system with uniform spectral gap Δ&gt;0, and embed a slowly decaying observable in its orthogonal complement. Then β can be made arbitrarily small while Δ is fixed. Hence the claimed inequality cannot hold.</p>
+    <p><strong>Corrected statement (proved):</strong> The residual lies in the <em>non‑mixing</em> subspace of the transfer operator. This refines the scope of the spectral‑gap theorem and explains why long memory can coexist with a uniform gap.</p>
+
+    <!-- ====== CONTRIBUTION 3 ====== -->
+    <h3><span class="badge-clarify">CLARIFIED</span> 2.3. Ghost cycles vs. DFT discrete lines (P4)</h3>
+    <p><strong>Claim clarified:</strong> The 2‑adic “ghost cycles” constructed by Dhiman (satisfying all local parity constraints but projecting to the empty set in ℕ) are sometimes thought to leave a trace as discrete spectral lines in the classical DFT of σ(n).</p>
+    <p><strong>What we clarify:</strong> The set of 2‑adic ghost cycles is a <em>continuum</em> (uncountably infinite). There is no natural projection map from Z₂ to ℕ that is compatible with the DFT (which is defined on finite integer windows). The question “do ghost cycles produce discrete lines?” is not well‑posed in the current framework.</p>
+    <p><strong>Consequence:</strong> This is a <em>category error</em>. The spectral signature of ghost cycles, if any, must be studied in the 2‑adic Haar measure setting, not in classical DFT. The route “discrete line ⇒ integer cycle” is unsupported and should be abandoned.</p>
+
+    <!-- ====== CONTRIBUTION 4 ====== -->
+    <h3><span class="badge-clarify">DELIMITED</span> 2.4. WHT full support ≠ Presburger undefinability (P5)</h3>
+    <p><strong>Claim delimited:</strong> The observation that σ mod 2 has near‑full WHT support (16383 out of 16384 coefficients non‑zero) is sometimes interpreted as evidence for Presburger undefinability.</p>
+    <p><strong>What we delimit:</strong> Full WHT support is a <em>necessary</em> numerical signature of non‑automaticity, but it is far from sufficient to establish Presburger undefinability. Random sequences also have full WHT support, yet the question of Presburger definability is about logical complexity, not spectral sparsity.</p>
+    <p>Moreover, the converse is false: one can construct Presburger‑undefinable sequences with moderately sparse WHT support. Thus the logical direction “full support ⇒ undefinable” is invalid.</p>
+    <p><strong>Corrected interpretation:</strong> The WHT observation is consistent with “σ mod 2 is not 2‑automatic” (which is already supported by Allouche–Shallit theory), but it does <em>not</em> prove the stronger Presburger claim.</p>
+
+    <h2>3. Previously Documented Failures (F1–F6)</h2>
+    <p>For completeness, we list the six previously identified failed research directions, all of which have been independently verified and are now considered closed:</p>
+    <ul>
+        <li><strong>F1:</strong> Intermediate S/O two‑sided inequality (counterexamples: n=100, n=27).</li>
+        <li><strong>F2:</strong> Galton–Watson branching process analogy (directionality error).</li>
+        <li><strong>F3:</strong> Substitution system for parity sequences (initial‑value dependence).</li>
+        <li><strong>F4:</strong> Julia set / complex dynamics intersection (triple failure: P32 misstatement, Per(T) non‑discrete in Q₂, sub‑hyperbolicity unverifiable).</li>
+        <li><strong>F5:</strong> Z[1/6] CRT invariant search (no conserved quantity found; n=27 varies by 70×).</li>
+        <li><strong>F6:</strong> Finite‑field F₅ arithmetic geometry (structure too poor; only Rₘᵢₙ mod 7 insight retained).</li>
+    </ul>
+    <p>Together with the four new refutations/clarifications above, these constitute a comprehensive <strong>roadblock map</strong> for the spectral and stochastic approaches to the Collatz problem.</p>
+
+    <h2>4. Value of Negative Results</h2>
+    <div class="callout">
+        In mathematics, knowing that a path is closed is as important as knowing that another is open. The refutations documented here save future researchers from repeating calculations that lead nowhere, and they sharpen the boundary of applicability of powerful tools such as transfer‑operator spectral theory and 2‑adic harmonic analysis.
+    </div>
+    <p>The mod‑16 spectral closure (Section 2.1) is a particularly crisp example: it shows that the apparent “almost eigenvalue” was a sampling phantom, not a dynamical feature. Such results are publishable in venues that value rigorous negative findings, e.g. <em>Experimental Mathematics</em>, <em>Discrete and Continuous Dynamical Systems</em>, or as a short note in <em>Bulletin of the AMS</em>.</p>
+
+    <h2>5. Conclusion</h2>
+    <p>This note has presented four rigorously established refutations/clarifications that arise from a systematic spectral analysis of the Collatz stopping‑time sequence. None of these results solve the Collatz conjecture; they are not meant to. They are <strong>road signs</strong> that say “this way does not lead to the conjecture.” In the long history of the 3x+1 problem, such road signs are valuable: they prevent wasted effort and focus attention on routes that remain genuinely open.</p>
+    <p>The author’s broader numerical observations (e.g. the 90.5% broadband residual, the Hurst exponent H≈0.608, the 3‑adic discontinuity) remain <em>conjectural</em> patterns awaiting rigorous treatment. The present note deliberately sets those aside to highlight what has been <em>proven</em>—even if what is proven is mostly negative.</p>
+
+    <div class="ref">
+        <strong>Keywords:</strong> Collatz conjecture · spectral gap · transfer operator · Markov chain · 2‑adic ghost cycles · Walsh–Hadamard · Presburger arithmetic · negative results
+        <br><br>
+        <strong>Proposition references:</strong> D25 (mod‑16 spectrum), F7 (Markov chain failure), P2 (spectral‑gap inequality refuted), P4 (ghost cycle clarification), P5 (WHT/Presburger delimitation), F1–F6 (previously documented failures).
+    </div>
+
+    <div class="footer-note">
+        This work is part of a larger proposition system documented in <em>PROPOSITIONS.md</em> (2026‑09‑05).<br>
+        The numerical experiments were performed with Python (N ≤ 20000) and verified by independent re‑implementations.
+    </div>
+
+</div>
+</body>
+</html>
